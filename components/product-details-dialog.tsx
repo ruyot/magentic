@@ -9,7 +9,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { getProductIcon } from "@/lib/product-icons"
 import type { Product } from "@/lib/mock-data"
 
 interface ProductDetailsDialogProps {
@@ -63,20 +62,26 @@ export function ProductDetailsDialog({ product, open, onOpenChange }: ProductDet
 
         <div className="p-6 space-y-6">
           {/* Product Image */}
-          <div className="aspect-[4/3] border-2 border-black bg-gray-100 flex items-center justify-center">
-            <div className="text-center p-8">
-              <div className="text-8xl mb-4">{getProductIcon(product.category)}</div>
-              <p className="text-sm uppercase tracking-wide text-gray-600">{product.category}</p>
-            </div>
+          <div className="aspect-[4/3] border-2 border-black bg-gray-100 overflow-hidden relative">
+            <img 
+              src={product.image} 
+              alt={product.title}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* Product Info Grid */}
           <div className="grid grid-cols-3 gap-6 py-6 border-y-2 border-black">
             <div>
-              <div className="text-xs uppercase tracking-widest text-gray-600 mb-2">Price</div>
+              <div className="text-xs uppercase tracking-widest text-gray-600 mb-2">Listed Price</div>
               <div className="text-4xl font-black">
                 {product.price === 0 ? "FREE" : `$${product.price.toLocaleString()}`}
               </div>
+              {product.priceRange && (
+                <p className="text-xs text-gray-500 italic mt-1">
+                  Market: ${product.priceRange.min}-${product.priceRange.max}
+                </p>
+              )}
             </div>
             <div>
               <div className="text-xs uppercase tracking-widest text-gray-600 mb-2">Location</div>

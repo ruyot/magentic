@@ -39,7 +39,7 @@ function MarketplaceContent() {
           animate={{ opacity: 1, y: 0 }}
           className="border-b-2 border-black pb-8 mb-8"
         >
-          <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4">
+          <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4" style={{ color: '#D4AF37' }}>
             MARKETPLACE
           </h1>
           <p className="text-xl text-gray-600 uppercase tracking-wide">
@@ -102,11 +102,15 @@ function MarketplaceContent() {
               className="group cursor-pointer"
             >
               {/* Product Image */}
-              <div className="aspect-[4/5] bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden mb-4 border-2 border-black">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-6">
+              <div className="aspect-[4/5] bg-gray-100 relative overflow-hidden mb-4 border-2 border-black">
+                <img 
+                  src={product.image} 
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="text-center p-6 opacity-0 group-hover:opacity-5 transition-opacity">
                     <div className="text-6xl mb-4">{getProductIcon(product.category)}</div>
-                    <div className="text-sm text-gray-600 uppercase tracking-wide">{product.category}</div>
                   </div>
                 </div>
                 {product.condition && (
@@ -122,9 +126,16 @@ function MarketplaceContent() {
                 <h3 className="text-xl font-bold uppercase tracking-tight line-clamp-2 group-hover:text-gray-600 transition-colors">
                   {product.title}
                 </h3>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-black">${product.price}</span>
-                  <span className="text-sm text-gray-500 uppercase tracking-wide">{product.location}</span>
+                <div className="space-y-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-black">${product.price}</span>
+                    <span className="text-sm text-gray-500 uppercase tracking-wide">{product.location}</span>
+                  </div>
+                  {product.priceRange && (
+                    <p className="text-xs text-gray-500 italic">
+                      Similar products seen at ${product.priceRange.min}-${product.priceRange.max}
+                    </p>
+                  )}
                 </div>
               </div>
             </motion.div>

@@ -38,11 +38,11 @@ export default function LandingPage() {
       </motion.header>
 
       {/* Hero Magazine Layout */}
-      <main className="max-w-7xl mx-auto px-8 pt-32 pb-16">
+      <main className="max-w-7xl mx-auto px-8 pt-16 pb-16">
         {/* Magazine Title - Fades on scroll */}
         <motion.div
           style={{ opacity: titleOpacity, scale: titleScale }}
-          className="text-center mb-16 min-h-[60vh] flex flex-col justify-center sticky top-0"
+          className="text-center mb-16 min-h-screen flex flex-col justify-center sticky top-0"
         >
           <motion.h1 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -62,9 +62,10 @@ export default function LandingPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-2xl md:text-3xl tracking-wide text-gray-700 font-light italic"
+            className="text-2xl md:text-3xl tracking-wide font-light italic"
+            style={{ color: '#D4AF37' }}
           >
-            The Future of Marketplace Trading
+            The Future of Trading Used Goods
           </motion.p>
         </motion.div>
 
@@ -83,8 +84,9 @@ export default function LandingPage() {
                 NEVER GET<br />GHOSTED AGAIN
               </h2>
               <p className="text-xl text-gray-700 leading-relaxed">
-                We invest early in ambitious technology solving hard problems in AI, 
-                infrastructure, and marketplace dynamics.
+                Set your price, let AI agents negotiate on your behalf, and close deals 
+                <span className="font-bold" style={{ color: '#D4AF37' }}> 10x faster</span> with 
+                <span className="font-bold" style={{ color: '#D4AF37' }}> zero ghosting</span>.
               </p>
             </div>
 
@@ -159,8 +161,8 @@ export default function LandingPage() {
                 AI Powered
               </div>
             </div>
-            <div className="mt-4 text-sm text-gray-600 italic text-center">
-              "We back outliers. The ones rethinking the way the world works."
+            <div className="mt-4 text-sm text-gray-600 text-center font-bold uppercase tracking-wide">
+              Stress tested with real world data
             </div>
           </motion.div>
         </motion.div>
@@ -175,7 +177,7 @@ export default function LandingPage() {
         >
           <div className="border-t-4 border-black pt-6">
             <TrendingUp className="h-12 w-12 mb-4" />
-            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide">Smart Bidding</h3>
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#D4AF37' }}>Smart Bidding</h3>
             <p className="text-gray-700 leading-relaxed">
               Set your maximum price and let AI agents negotiate the best deal within your budget. 
               Market analysis included.
@@ -184,7 +186,7 @@ export default function LandingPage() {
 
           <div className="border-t-4 border-black pt-6">
             <Sparkles className="h-12 w-12 mb-4" />
-            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide">Real-Time Chat</h3>
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#D4AF37' }}>Real-Time Chat</h3>
             <p className="text-gray-700 leading-relaxed">
               Watch agents communicate and finalize deals instantly. Human intervention only 
               at critical checkpoints.
@@ -193,7 +195,7 @@ export default function LandingPage() {
 
           <div className="border-t-4 border-black pt-6">
             <Shield className="h-12 w-12 mb-4" />
-            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide">Zero Ghosting</h3>
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#D4AF37' }}>Zero Ghosting</h3>
             <p className="text-gray-700 leading-relaxed">
               AI agents never sleep, never ghost. They respond instantly and keep negotiations 
               moving forward 24/7.

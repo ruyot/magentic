@@ -6,7 +6,6 @@ import Link from "next/link"
 import { MagazineHeader } from "@/components/magazine-header"
 import { ChatInterface } from "@/components/chat-interface"
 import { mockProducts, generateMockMessages, type Bid } from "@/lib/mock-data"
-import { getProductIcon } from "@/lib/product-icons"
 import { ShoppingBag, TrendingUp, MessageSquare } from "lucide-react"
 
 export default function BuyerBidsPage() {
@@ -56,7 +55,7 @@ export default function BuyerBidsPage() {
           className="border-b-2 border-black pb-8 mb-8"
         >
           <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4">
-            YOUR BIDS
+            YOUR <span style={{ color: '#D4AF37' }}>BIDS</span>
           </h1>
           <div className="flex gap-8 text-sm uppercase tracking-wide">
             <div className="flex items-center gap-2">
@@ -83,28 +82,42 @@ export default function BuyerBidsPage() {
             <p className="text-gray-600 mb-8 text-lg">
               Start browsing the marketplace to place your first bid
             </p>
-            <Link href="/marketplace?mode=buyer">
+            <div className="flex gap-4 justify-center">
+              <Link href="/marketplace?mode=buyer">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-black text-white px-8 py-4 font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-all"
+                >
+                  Browse Marketplace
+                </motion.button>
+              </Link>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-black text-white px-8 py-4 font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-all"
+                onClick={() => {
+                  localStorage.removeItem("userBids");
+                  window.location.reload();
+                }}
+                className="bg-white text-black px-6 py-4 font-bold uppercase tracking-wider border-2 border-black hover:bg-gray-100 transition-all text-sm"
               >
-                Browse Marketplace
+                Reset
               </motion.button>
-            </Link>
+            </div>
           </motion.div>
         ) : (
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Left: Bids List */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-              className="lg:col-span-1 space-y-4"
-            >
-              <h2 className="text-2xl font-black uppercase tracking-tight border-b-2 border-black pb-2 mb-4">
-                Active Bids
-              </h2>
+          <div className="space-y-8">
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Left: Bids List */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 }}
+                className="lg:col-span-1 space-y-4"
+              >
+                <h2 className="text-2xl font-black uppercase tracking-tight border-b-2 border-black pb-2 mb-4">
+                  Active Bids
+                </h2>
               {bids.map((bid, index) => {
                 const product = mockProducts.find((p) => p.id === bid.productId)
                 if (!product) return null
@@ -125,10 +138,14 @@ export default function BuyerBidsPage() {
                     }`}
                   >
                     <div className="flex gap-4">
-                      <div className={`w-20 h-20 border-2 flex items-center justify-center text-2xl ${
+                      <div className={`w-20 h-20 border-2 overflow-hidden ${
                         isSelected ? "border-white" : "border-black"
                       }`}>
-                        {getProductIcon(product.category)}
+                        <img 
+                          src={product.image} 
+                          alt={product.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-bold uppercase text-sm tracking-tight line-clamp-2 mb-1">
@@ -172,6 +189,29 @@ export default function BuyerBidsPage() {
                   </div>
                 </div>
               )}
+              </motion.div>
+            </div>
+
+            {/* Reset Button */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="flex justify-center pt-8 border-t-2 border-gray-300"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  if (confirm("Are you sure you want to clear all bids?")) {
+                    localStorage.removeItem("userBids");
+                    window.location.reload();
+                  }
+                }}
+                className="bg-white text-gray-700 px-6 py-3 font-bold uppercase tracking-wider border-2 border-gray-400 hover:border-black hover:text-black transition-all text-sm"
+              >
+                Reset All Bids
+              </motion.button>
             </motion.div>
           </div>
         )}

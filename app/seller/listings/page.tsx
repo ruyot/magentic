@@ -5,7 +5,6 @@ import { motion } from "framer-motion"
 import { MagazineHeader } from "@/components/magazine-header"
 import { ChatInterface } from "@/components/chat-interface"
 import { mockProducts, generateMockMessages, type Bid } from "@/lib/mock-data"
-import { getProductIcon } from "@/lib/product-icons"
 import { TrendingUp, DollarSign, MessageSquare } from "lucide-react"
 
 export default function SellerListingsPage() {
@@ -60,7 +59,7 @@ export default function SellerListingsPage() {
           className="border-b-2 border-black pb-8 mb-8"
         >
           <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4">
-            YOUR LISTINGS
+            YOUR <span style={{ color: '#D4AF37' }}>LISTINGS</span>
           </h1>
           <div className="flex gap-8 text-sm uppercase tracking-wide">
             <div className="flex items-center gap-2">
@@ -104,10 +103,14 @@ export default function SellerListingsPage() {
                   }`}
                 >
                   <div className="flex gap-4">
-                    <div className={`w-20 h-20 border-2 flex items-center justify-center text-2xl ${
+                    <div className={`w-20 h-20 border-2 overflow-hidden ${
                       isSelected ? "border-white" : "border-black"
                     }`}>
-                      {getProductIcon(listing.category)}
+                      <img 
+                        src={listing.image} 
+                        alt={listing.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-bold uppercase text-sm tracking-tight line-clamp-2 mb-1">

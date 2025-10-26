@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { Bot, User } from "lucide-react"
-import { getProductIcon } from "@/lib/product-icons"
+import { Bot } from "lucide-react"
 import type { Bid, Product } from "@/lib/mock-data"
 
 interface ChatInterfaceProps {
@@ -26,25 +25,36 @@ export function ChatInterface({ bid, product, mode }: ChatInterfaceProps) {
       {/* Header - Magazine Style */}
       <div className="p-6 border-b-2 border-black bg-white">
         <div className="flex items-start gap-4">
-          <div className="w-24 h-24 border-2 border-black bg-gray-100 flex-shrink-0 flex items-center justify-center text-3xl">
-            {getProductIcon(product.category)}
+          <div className="w-24 h-24 border-2 border-black bg-gray-100 flex-shrink-0 overflow-hidden">
+            <img 
+              src={product.image} 
+              alt={product.title}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div className="flex-1">
             <h2 className="font-black text-xl uppercase tracking-tight line-clamp-2 mb-2">{product.title}</h2>
-            <div className="grid grid-cols-3 gap-4 text-sm">
-              <div>
-                <div className="text-xs uppercase tracking-wide text-gray-600 mb-1">Listed Price</div>
-                <div className="font-bold text-lg">${product.price}</div>
+            <div className="space-y-2">
+              <div className="grid grid-cols-3 gap-4 text-sm">
+                <div>
+                  <div className="text-xs uppercase tracking-wide text-gray-600 mb-1">Listed Price</div>
+                  <div className="font-bold text-lg">${product.price}</div>
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-wide text-gray-600 mb-1">Your Max</div>
+                  <div className="font-bold text-lg">${bid.maxPrice}</div>
+                </div>
+                <div>
+                  <div className="text-xs uppercase tracking-wide text-gray-600 mb-1">Current Offer</div>
+                  <div className="font-bold text-lg text-black">${bid.currentOffer}</div>
+                </div>
               </div>
-              <div>
-                <div className="text-xs uppercase tracking-wide text-gray-600 mb-1">Your Max</div>
-                <div className="font-bold text-lg">${bid.maxPrice}</div>
-              </div>
-              <div>
-                <div className="text-xs uppercase tracking-wide text-gray-600 mb-1">Current Offer</div>
-                <div className="font-bold text-lg text-black">${bid.currentOffer}</div>
-              </div>
+              {product.priceRange && (
+                <p className="text-xs text-gray-500 italic">
+                  Similar products typically seen at ${product.priceRange.min}-${product.priceRange.max}
+                </p>
+              )}
             </div>
           </div>
         </div>
