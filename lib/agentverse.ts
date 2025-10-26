@@ -149,7 +149,7 @@ export async function startAgentNegotiation(params: {
     
     const buyerMessage: NegotiationMessage = {
       from: "buyer",
-      message: `Hey! Before we talk price — any scratches on the screen or body? I'm interested in the ${params.productTitle}.`,
+      message: "Hey! Before we talk price — any scratches on the screen or body?",
       timestamp: new Date().toISOString(),
       agentAddress: AGENT_ADDRESSES.buyer,
     }
@@ -252,9 +252,17 @@ export async function startAgentNegotiation(params: {
       // Coordinate meetup
       await new Promise(resolve => setTimeout(resolve, 1000))
       
+      // Generate meetup time (today 6-8 PM)
+      const today = new Date()
+      const meetupStart = new Date(today)
+      meetupStart.setHours(18, 0, 0, 0)
+      const meetupEnd = new Date(today)
+      meetupEnd.setHours(20, 0, 0, 0)
+      const timeSlot = `${meetupStart.toISOString().split('.')[0]}Z–${meetupEnd.toISOString().split('.')[0]}Z`
+      
       const buyerMeetupMessage: NegotiationMessage = {
         from: "buyer",
-        message: "Can meet today 6:00 PM–8:00 PM at Union Station. Does that work?",
+        message: `Can meet ${timeSlot} at SL-01. Does that work?`,
         timestamp: new Date().toISOString(),
         agentAddress: AGENT_ADDRESSES.buyer,
       }
@@ -266,7 +274,7 @@ export async function startAgentNegotiation(params: {
       
       const sellerMeetupMessage: NegotiationMessage = {
         from: "seller",
-        message: "Great — see you today 6:00 PM–8:00 PM at Union Station.",
+        message: `Great — see you ${timeSlot} at SL-01.`,
         timestamp: new Date().toISOString(),
         agentAddress: AGENT_ADDRESSES.seller,
       }

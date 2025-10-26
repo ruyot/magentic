@@ -58,15 +58,15 @@ export const mockProducts: Product[] = [
   {
     id: "2",
     title: "iPhone 13 128GB - Blue",
-    price: 450,
+    price: 640,
     location: "Stanford, CA",
     category: "Electronics",
     image: "/iphone13.png",
     description:
-      "Unlocked iPhone 13 in excellent condition. Battery health at 95%. Comes with case and screen protector.",
+      "Unlocked iPhone 13, Midnight Blue. Battery health at 90%. Tiny hairline scratch on screen (barely noticeable). Includes original box and USB-C cable.",
     sellerId: "seller2",
     condition: "Excellent",
-    priceRange: { min: 380, max: 500 },
+    priceRange: { min: 580, max: 650 },
   },
   {
     id: "3",
