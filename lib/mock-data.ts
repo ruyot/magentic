@@ -470,6 +470,80 @@ export const mockProducts: Product[] = [
 ]
 
 export function generateMockMessages(productId: string, maxPrice: number, productPrice: number): ChatMessage[] {
+  // iPhone 13 (product ID "2") gets the real agent conversation
+  if (productId === "2") {
+    const initialOffer = Math.floor(maxPrice * 0.91)
+    const sellerCounter1 = Math.floor(productPrice * 0.96)
+    const buyerCounter2 = Math.floor(maxPrice * 0.97)
+    const finalOffer = Math.floor((buyerCounter2 + sellerCounter1) / 2)
+    
+    // Generate meetup time (today 6-8 PM)
+    const today = new Date()
+    const meetupStart = new Date(today)
+    meetupStart.setHours(18, 0, 0, 0)
+    const meetupEnd = new Date(today)
+    meetupEnd.setHours(20, 0, 0, 0)
+    const timeSlot = `${meetupStart.toISOString().split('.')[0]}Z–${meetupEnd.toISOString().split('.')[0]}Z`
+    
+    return [
+      {
+        id: "1",
+        sender: "buyer-agent",
+        message: "Hey! Before we talk price — any scratches on the screen or body?",
+        timestamp: new Date(Date.now() - 3600000),
+      },
+      {
+        id: "2",
+        sender: "seller-agent",
+        message: "There's a tiny hairline scratch on the screen—barely noticeable; everything else is mint.",
+        timestamp: new Date(Date.now() - 3540000),
+      },
+      {
+        id: "3",
+        sender: "buyer-agent",
+        message: `Appreciate it. Given the tiny screen scratch, could you do $${initialOffer}?`,
+        timestamp: new Date(Date.now() - 3480000),
+      },
+      {
+        id: "4",
+        sender: "seller-agent",
+        message: `Hi — I can do $${sellerCounter1}.`,
+        timestamp: new Date(Date.now() - 3000000),
+      },
+      {
+        id: "5",
+        sender: "buyer-agent",
+        message: `Could you do $${buyerCounter2}? I can meet downtown.`,
+        timestamp: new Date(Date.now() - 2400000),
+      },
+      {
+        id: "6",
+        sender: "seller-agent",
+        message: `Hi — I can do $${finalOffer}.`,
+        timestamp: new Date(Date.now() - 1800000),
+      },
+      {
+        id: "7",
+        sender: "buyer-agent",
+        message: `Deal at $${finalOffer}! Let's set a time.`,
+        timestamp: new Date(Date.now() - 1200000),
+      },
+      {
+        id: "8",
+        sender: "buyer-agent",
+        message: `Can meet ${timeSlot} at SL-01. Does that work?`,
+        timestamp: new Date(Date.now() - 600000),
+      },
+      {
+        id: "9",
+        sender: "seller-agent",
+        message: `Great — see you ${timeSlot} at SL-01.`,
+        timestamp: new Date(Date.now() - 300000),
+      },
+    ]
+  }
+  
+  // Generic conversation for other products
   const currentOffer = Math.floor((maxPrice + productPrice) / 2)
 
   return [
