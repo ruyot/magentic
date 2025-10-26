@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { PageTransition } from '@/components/page-transition'
 import './globals.css'
 
 const inter = Inter({ 
@@ -24,9 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <PageTransition>
-          {children}
-        </PageTransition>
+        {children}
         <Analytics />
       </body>
     </html>

@@ -1,56 +1,79 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
 import { ShoppingBag, Store, Sparkles, TrendingUp, Shield } from "lucide-react"
+import { useRef } from "react"
 
 export default function LandingPage() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  })
+
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
+  const titleScale = useTransform(scrollYProgress, [0, 0.3], [1, 0.8])
+
   return (
-    <div className="min-h-screen bg-white">
+    <div ref={containerRef} className="min-h-screen bg-white">
       {/* Magazine Header */}
       <motion.header 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="border-b-2 border-black"
+        className="border-b-2 border-black fixed top-0 left-0 right-0 bg-white z-50"
       >
         <div className="max-w-7xl mx-auto px-8 py-6">
           <div className="flex justify-between items-center">
-            <div className="text-sm uppercase tracking-widest text-gray-600">
-              Est. 2025
-            </div>
+            <Link href="/" className="text-sm uppercase tracking-widest text-gray-600 hover:text-black transition-colors">
+              AgentMarket
+            </Link>
             <div className="flex gap-8 text-sm uppercase tracking-wider">
-              <span className="hover:text-gray-600 cursor-pointer transition-colors">Features</span>
-              <span className="hover:text-gray-600 cursor-pointer transition-colors">About</span>
-              <span className="hover:text-gray-600 cursor-pointer transition-colors">Contact</span>
+              <Link href="/marketplace?mode=buyer" className="hover:text-gray-600 cursor-pointer transition-colors">Browse</Link>
+              <Link href="/seller/listings" className="hover:text-gray-600 cursor-pointer transition-colors">Sell</Link>
             </div>
           </div>
         </div>
       </motion.header>
 
       {/* Hero Magazine Layout */}
-      <main className="max-w-7xl mx-auto px-8 py-16">
-        {/* Magazine Title */}
+      <main className="max-w-7xl mx-auto px-8 pt-32 pb-16">
+        {/* Magazine Title - Fades on scroll */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center mb-16"
+          style={{ opacity: titleOpacity, scale: titleScale }}
+          className="text-center mb-16 min-h-[60vh] flex flex-col justify-center sticky top-0"
         >
-          <h1 className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter mb-4">
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter mb-4"
+          >
             AGENT<span className="block">MARKET</span>
-          </h1>
-          <div className="h-1 w-64 bg-black mx-auto mb-6"></div>
-          <p className="text-2xl md:text-3xl tracking-wide text-gray-700 font-light italic">
+          </motion.h1>
+          <motion.div 
+            initial={{ width: 0 }}
+            animate={{ width: "16rem" }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="h-1 bg-black mx-auto mb-6"
+          ></motion.div>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-2xl md:text-3xl tracking-wide text-gray-700 font-light italic"
+          >
             The Future of Marketplace Trading
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Feature Story Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
           className="grid md:grid-cols-2 gap-12 mb-20"
         >
           {/* Left Column - Main Story */}
@@ -115,8 +138,9 @@ export default function LandingPage() {
           {/* Right Column - Hero Image */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             className="relative"
           >
             <div className="aspect-[4/5] bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
@@ -143,9 +167,10 @@ export default function LandingPage() {
 
         {/* Feature Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
           className="grid md:grid-cols-3 gap-8 mb-20"
         >
           <div className="border-t-4 border-black pt-6">
@@ -179,8 +204,9 @@ export default function LandingPage() {
         {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="border-t-2 border-b-2 border-black py-12"
         >
           <div className="grid grid-cols-3 gap-8 text-center">
@@ -199,18 +225,19 @@ export default function LandingPage() {
           </div>
         </motion.div>
 
-        {/* Footer Quote */}
+        {/* Footer */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-center py-16"
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center py-16 border-t-2 border-black mt-20"
         >
-          <blockquote className="text-3xl md:text-4xl font-light italic text-gray-800 max-w-4xl mx-auto leading-relaxed">
-            "Moving America forward, one intelligent deal at a time."
-          </blockquote>
-          <div className="mt-8 text-sm uppercase tracking-widest text-gray-600">
+          <div className="text-sm uppercase tracking-widest text-gray-600 mb-4">
             Powered by Fetch.ai • Arize • Letta
+          </div>
+          <div className="text-xs text-gray-500">
+            © 2025 AgentMarket. AI-Powered Marketplace.
           </div>
         </motion.div>
       </main>

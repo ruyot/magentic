@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { getProductIcon } from "@/lib/product-icons"
 import type { Product } from "@/lib/mock-data"
 
 interface ProductDetailsDialogProps {
@@ -50,89 +51,118 @@ export function ProductDetailsDialog({ product, open, onOpenChange }: ProductDet
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl text-[#4D5061]">{product.title}</DialogTitle>
-        </DialogHeader>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto border-2 border-black p-0">
+        {/* Magazine Header */}
+        <div className="border-b-2 border-black p-6">
+          <DialogHeader>
+            <DialogTitle className="text-3xl font-black uppercase tracking-tight leading-tight">
+              {product.title}
+            </DialogTitle>
+          </DialogHeader>
+        </div>
 
-        <div className="space-y-4">
-          <div className="aspect-video overflow-hidden rounded-lg bg-gray-100">
-            <img src={product.image || "/placeholder.svg"} alt={product.title} className="w-full h-full object-cover" />
+        <div className="p-6 space-y-6">
+          {/* Product Image */}
+          <div className="aspect-[4/3] border-2 border-black bg-gray-100 flex items-center justify-center">
+            <div className="text-center p-8">
+              <div className="text-8xl mb-4">{getProductIcon(product.category)}</div>
+              <p className="text-sm uppercase tracking-wide text-gray-600">{product.category}</p>
+            </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <p className="text-3xl font-bold text-[#4D5061]">
+          {/* Product Info Grid */}
+          <div className="grid grid-cols-3 gap-6 py-6 border-y-2 border-black">
+            <div>
+              <div className="text-xs uppercase tracking-widest text-gray-600 mb-2">Price</div>
+              <div className="text-4xl font-black">
                 {product.price === 0 ? "FREE" : `$${product.price.toLocaleString()}`}
-              </p>
-              <div className="flex items-center gap-2 text-[#5C80BC]">
-                <Tag className="h-4 w-4" />
-                <span className="text-sm">{product.category}</span>
               </div>
             </div>
-
-            <div className="flex items-center text-[#5C80BC]">
-              <MapPin className="h-4 w-4 mr-2" />
-              <span>{product.location}</span>
+            <div>
+              <div className="text-xs uppercase tracking-widest text-gray-600 mb-2">Location</div>
+              <div className="font-bold uppercase tracking-tight text-sm flex items-center gap-2">
+                <MapPin className="h-4 w-4" />
+                {product.location}
+              </div>
             </div>
-
-            {product.mileage && (
-              <p className="text-sm text-[#5C80BC]">
-                <span className="font-semibold">Mileage:</span> {product.mileage}
-              </p>
-            )}
-
-            <div className="pt-2">
-              <h3 className="font-semibold text-[#4D5061] mb-2">Description</h3>
-              <p className="text-[#5C80BC] leading-relaxed">{product.description}</p>
+            <div>
+              <div className="text-xs uppercase tracking-widest text-gray-600 mb-2">Category</div>
+              <div className="font-bold uppercase tracking-tight text-sm flex items-center gap-2">
+                <Tag className="h-4 w-4" />
+                {product.category}
+              </div>
             </div>
           </div>
 
+          {/* Condition Badge */}
+          {product.condition && (
+            <div className="inline-block border-2 border-black px-4 py-2">
+              <span className="font-bold uppercase tracking-wider text-sm">
+                Condition: {product.condition}
+              </span>
+            </div>
+          )}
+
+          {/* Description */}
+          <div className="space-y-3">
+            <h3 className="text-xl font-black uppercase tracking-tight border-b-2 border-black pb-2">
+              Description
+            </h3>
+            <p className="leading-relaxed text-gray-800">{product.description}</p>
+          </div>
+
+          {/* Bid Input Form */}
           {showBidInput && (
-            <form onSubmit={handleSubmitBid} className="space-y-4 pt-4 border-t">
-              <div className="space-y-2">
-                <Label htmlFor="maxPrice" className="text-[#4D5061]">
-                  Enter your maximum bid price
+            <form onSubmit={handleSubmitBid} className="space-y-4 pt-4 border-t-2 border-black">
+              <div className="space-y-3">
+                <Label htmlFor="maxPrice" className="text-sm font-black uppercase tracking-wide block">
+                  Enter Your Maximum Bid
                 </Label>
-                <Input
-                  id="maxPrice"
-                  type="number"
-                  placeholder="Enter amount"
-                  value={maxPrice}
-                  onChange={(e) => setMaxPrice(e.target.value)}
-                  className="border-[#5C80BC]/30 focus:border-[#02A9EA] focus:ring-[#02A9EA]"
-                  min="0"
-                  step="0.01"
-                  required
-                  autoFocus
-                />
-                <p className="text-sm text-[#5C80BC]">
-                  Our agent will negotiate on your behalf up to this amount. Press Enter to continue.
+                <div className="relative">
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-2xl font-black">$</span>
+                  <Input
+                    id="maxPrice"
+                    type="number"
+                    placeholder="0.00"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className="pl-10 h-14 border-2 border-black text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-black"
+                    min="0"
+                    step="0.01"
+                    required
+                    autoFocus
+                  />
+                </div>
+                <p className="text-sm text-gray-600 uppercase tracking-wide">
+                  → AI Agent will negotiate up to this amount
                 </p>
               </div>
             </form>
           )}
         </div>
 
-        <DialogFooter>
-          {!showBidInput ? (
-            <Button
-              onClick={handleProceedToDetails}
-              className="bg-[#02A9EA] hover:bg-[#0290C8] text-white"
-              disabled={product.price === 0}
-            >
-              Proceed to Details
-            </Button>
-          ) : (
-            <Button
-              onClick={handleSubmitBid}
-              className="bg-[#DC136C] hover:bg-[#C01160] text-white"
-              disabled={!maxPrice || Number.parseFloat(maxPrice) <= 0}
-            >
-              Start Negotiation
-            </Button>
-          )}
-        </DialogFooter>
+        {/* Footer Actions */}
+        <div className="border-t-2 border-black p-6 bg-gray-50">
+          <DialogFooter>
+            {!showBidInput ? (
+              <button
+                onClick={handleProceedToDetails}
+                className="w-full bg-black text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors disabled:bg-gray-400"
+                disabled={product.price === 0}
+              >
+                Place Bid →
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmitBid}
+                className="w-full bg-black text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors disabled:bg-gray-400"
+                disabled={!maxPrice || Number.parseFloat(maxPrice) <= 0}
+              >
+                Start AI Negotiation →
+              </button>
+            )}
+          </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   )
