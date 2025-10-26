@@ -1,95 +1,219 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
-import { ShoppingBag, Store } from "lucide-react"
-import { Button } from "@/components/ui/button"
-
-const catchphrases = [
-  "Never get ghosted during a deal again",
-  "Close deals 10x faster with AI agents",
-  "Your time is valuable, let agents negotiate",
-  "Smart bidding, smarter deals",
-  "Real-time negotiations, zero hassle",
-]
+import { ShoppingBag, Store, Sparkles, TrendingUp, Shield } from "lucide-react"
 
 export default function LandingPage() {
-  const [currentPhrase, setCurrentPhrase] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false)
-      setTimeout(() => {
-        setCurrentPhrase((prev) => (prev + 1) % catchphrases.length)
-        setIsVisible(true)
-      }, 500)
-    }, 3000)
-
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Hero Section */}
-      <main className="flex-1 flex items-center justify-center px-4 py-12">
-        <div className="max-w-4xl w-full text-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-foreground text-balance">Welcome to the Marketplace</h1>
-            <div className="h-16 flex items-center justify-center">
-              <p
-                className={`text-xl md:text-2xl text-primary max-w-2xl mx-auto text-balance transition-opacity duration-500 ${
-                  isVisible ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                {catchphrases[currentPhrase]}
-              </p>
+    <div className="min-h-screen bg-white">
+      {/* Magazine Header */}
+      <motion.header 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="border-b-2 border-black"
+      >
+        <div className="max-w-7xl mx-auto px-8 py-6">
+          <div className="flex justify-between items-center">
+            <div className="text-sm uppercase tracking-widest text-gray-600">
+              Est. 2025
             </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <Link href="/marketplace?mode=buyer">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg h-auto min-w-[200px] shadow-card hover:shadow-card-hover transition-all duration-300"
-              >
-                <ShoppingBag className="mr-2 h-6 w-6" />
-                Join as Buyer
-              </Button>
-            </Link>
-
-            <Link href="/seller/listings">
-              <Button
-                size="lg"
-                variant="secondary"
-                className="px-8 py-6 text-lg h-auto min-w-[200px] shadow-card hover:shadow-card-hover transition-all duration-300"
-              >
-                <Store className="mr-2 h-6 w-6" />
-                Join as Seller
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 pt-12 max-w-3xl mx-auto">
-            <div className="bg-card p-6 rounded-lg shadow-card hover:shadow-card-hover transition-all duration-300 border-t-4 border-primary">
-              <h3 className="font-semibold text-lg text-card-foreground mb-2">Smart Bidding</h3>
-              <p className="text-muted-foreground">Set your max price and let our agents negotiate for you</p>
-            </div>
-            <div className="bg-card p-6 rounded-lg shadow-card hover:shadow-card-hover transition-all duration-300 border-t-4 border-accent">
-              <h3 className="font-semibold text-lg text-card-foreground mb-2">Real-time Chat</h3>
-              <p className="text-muted-foreground">Watch agents communicate and finalize deals instantly</p>
-            </div>
-            <div className="bg-card p-6 rounded-lg shadow-card hover:shadow-card-hover transition-all duration-300 border-t-4 border-secondary">
-              <h3 className="font-semibold text-lg text-card-foreground mb-2">Easy Listing</h3>
-              <p className="text-muted-foreground">Manage all your products and bids in one place</p>
+            <div className="flex gap-8 text-sm uppercase tracking-wider">
+              <span className="hover:text-gray-600 cursor-pointer transition-colors">Features</span>
+              <span className="hover:text-gray-600 cursor-pointer transition-colors">About</span>
+              <span className="hover:text-gray-600 cursor-pointer transition-colors">Contact</span>
             </div>
           </div>
         </div>
-      </main>
+      </motion.header>
 
-      <footer className="bg-muted text-muted-foreground py-6 text-center">
-        <p className="text-sm">© 2025 Marketplace. Powered by intelligent agents.</p>
-      </footer>
+      {/* Hero Magazine Layout */}
+      <main className="max-w-7xl mx-auto px-8 py-16">
+        {/* Magazine Title */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h1 className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter mb-4">
+            AGENT<span className="block">MARKET</span>
+          </h1>
+          <div className="h-1 w-64 bg-black mx-auto mb-6"></div>
+          <p className="text-2xl md:text-3xl tracking-wide text-gray-700 font-light italic">
+            The Future of Marketplace Trading
+          </p>
+        </motion.div>
+
+        {/* Feature Story Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="grid md:grid-cols-2 gap-12 mb-20"
+        >
+          {/* Left Column - Main Story */}
+          <div className="space-y-6">
+            <div className="border-l-4 border-black pl-6">
+              <h2 className="text-5xl font-bold leading-tight mb-4">
+                NEVER GET<br />GHOSTED AGAIN
+              </h2>
+              <p className="text-xl text-gray-700 leading-relaxed">
+                We invest early in ambitious technology solving hard problems in AI, 
+                infrastructure, and marketplace dynamics.
+              </p>
+            </div>
+
+            <div className="space-y-4 text-lg leading-relaxed text-gray-800">
+              <p>
+                <span className="font-bold text-2xl">AI agents</span> on both sides communicate 
+                in real-time, negotiating deals while you focus on what matters.
+              </p>
+              <p>
+                No more waiting months for a deal to pull through. No more endless messaging. 
+                Just intelligent automation with human intervention at critical moments.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-8">
+              <Link href="/marketplace?mode=buyer" className="group">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-black text-white px-8 py-5 text-center font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors relative overflow-hidden"
+                >
+                  <div className="relative z-10 flex items-center justify-center gap-3">
+                    <ShoppingBag className="h-5 w-5" />
+                    <span>Browse as Buyer</span>
+                  </div>
+                  <motion.div
+                    className="absolute inset-0 bg-gray-700"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+              </Link>
+
+              <Link href="/seller/listings" className="group">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="border-2 border-black px-8 py-5 text-center font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors"
+                >
+                  <div className="flex items-center justify-center gap-3">
+                    <Store className="h-5 w-5" />
+                    <span>Sell with AI</span>
+                  </div>
+                </motion.div>
+              </Link>
+            </div>
+          </div>
+
+          {/* Right Column - Hero Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="relative"
+          >
+            <div className="aspect-[4/5] bg-gradient-to-br from-gray-900 via-gray-800 to-black relative overflow-hidden">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center space-y-4 p-8">
+                  <Sparkles className="h-24 w-24 text-white mx-auto mb-6" />
+                  <div className="text-6xl font-black text-white leading-tight">
+                    10X<br />FASTER
+                  </div>
+                  <div className="text-white/80 text-xl font-light tracking-wide">
+                    Deal Closure Rate
+                  </div>
+                </div>
+              </div>
+              <div className="absolute top-4 right-4 bg-white px-4 py-2 font-bold text-sm uppercase tracking-wider">
+                AI Powered
+              </div>
+            </div>
+            <div className="mt-4 text-sm text-gray-600 italic text-center">
+              "We back outliers. The ones rethinking the way the world works."
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Feature Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="grid md:grid-cols-3 gap-8 mb-20"
+        >
+          <div className="border-t-4 border-black pt-6">
+            <TrendingUp className="h-12 w-12 mb-4" />
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide">Smart Bidding</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Set your maximum price and let AI agents negotiate the best deal within your budget. 
+              Market analysis included.
+            </p>
+          </div>
+
+          <div className="border-t-4 border-black pt-6">
+            <Sparkles className="h-12 w-12 mb-4" />
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide">Real-Time Chat</h3>
+            <p className="text-gray-700 leading-relaxed">
+              Watch agents communicate and finalize deals instantly. Human intervention only 
+              at critical checkpoints.
+            </p>
+          </div>
+
+          <div className="border-t-4 border-black pt-6">
+            <Shield className="h-12 w-12 mb-4" />
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide">Zero Ghosting</h3>
+            <p className="text-gray-700 leading-relaxed">
+              AI agents never sleep, never ghost. They respond instantly and keep negotiations 
+              moving forward 24/7.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="border-t-2 border-b-2 border-black py-12"
+        >
+          <div className="grid grid-cols-3 gap-8 text-center">
+            <div>
+              <div className="text-6xl font-black mb-2">10X</div>
+              <div className="text-sm uppercase tracking-wider text-gray-600">Faster Deals</div>
+            </div>
+            <div>
+              <div className="text-6xl font-black mb-2">24/7</div>
+              <div className="text-sm uppercase tracking-wider text-gray-600">AI Active</div>
+            </div>
+            <div>
+              <div className="text-6xl font-black mb-2">0%</div>
+              <div className="text-sm uppercase tracking-wider text-gray-600">Ghost Rate</div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Footer Quote */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="text-center py-16"
+        >
+          <blockquote className="text-3xl md:text-4xl font-light italic text-gray-800 max-w-4xl mx-auto leading-relaxed">
+            "Moving America forward, one intelligent deal at a time."
+          </blockquote>
+          <div className="mt-8 text-sm uppercase tracking-widest text-gray-600">
+            Powered by Fetch.ai • Arize • Letta
+          </div>
+        </motion.div>
+      </main>
     </div>
   )
 }
