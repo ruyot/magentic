@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import type { Product } from "@/lib/mock-data"
+import { startAgentNegotiation } from "@/lib/agentverse"
 
 interface ProductDetailsDialogProps {
   product: Product | null
@@ -21,6 +22,7 @@ export function ProductDetailsDialog({ product, open, onOpenChange }: ProductDet
   const router = useRouter()
   const [showBidInput, setShowBidInput] = useState(false)
   const [maxPrice, setMaxPrice] = useState("")
+  const [isNegotiating, setIsNegotiating] = useState(false)
 
   if (!product) return null
 
@@ -28,16 +30,61 @@ export function ProductDetailsDialog({ product, open, onOpenChange }: ProductDet
     setShowBidInput(true)
   }
 
-  const handleSubmitBid = (e: React.FormEvent) => {
+  const handleSubmitBid = async (e: React.FormEvent) => {
     e.preventDefault()
     if (maxPrice && Number.parseFloat(maxPrice) > 0) {
+      const maxPriceNum = Number.parseFloat(maxPrice)
+      
       // Store bid in localStorage for demo purposes
       const bids = JSON.parse(localStorage.getItem("userBids") || "[]")
-      bids.push({
+      const newBid = {
+        id: `bid-${Date.now()}`,
         productId: product.id,
-        maxPrice: Number.parseFloat(maxPrice),
+        maxPrice: maxPriceNum,
+        currentOffer: Math.min(maxPriceNum, product.price),
+        status: "active" as const,
+        messages: [] as any[],
         timestamp: new Date().toISOString(),
-      })
+      }
+
+      // If this is the iPhone 13 (product id "2"), trigger real agent negotiation
+      if (product.id === "2") {
+        console.log("Triggering real agent negotiation for iPhone 13!")
+        
+        try {
+          const agentMessages: any[] = []
+          
+          // Start real agent-to-agent negotiation
+          const result = await startAgentNegotiation({
+            productId: product.id,
+            productTitle: product.title,
+            listingPrice: product.price,
+            maxBuyerPrice: maxPriceNum,
+            onMessage: (message) => {
+              console.log("📨 Agent message received:", message)
+              // Convert to our message format
+              agentMessages.push({
+                id: `msg-${Date.now()}-${Math.random()}`,
+                sender: message.from === "buyer" ? "buyer-agent" : "seller-agent",
+                message: message.message,
+                timestamp: message.timestamp,
+              })
+            },
+          })
+
+          console.log("✅ Agent negotiation completed:", result)
+          
+          // Update bid with real agent messages
+          if (agentMessages.length > 0) {
+            newBid.messages = agentMessages
+            newBid.currentOffer = result.finalOffer || newBid.currentOffer
+          }
+        } catch (error) {
+          console.error("❌ Agent negotiation error:", error)
+        }
+      }
+
+      bids.push(newBid)
       localStorage.setItem("userBids", JSON.stringify(bids))
 
       // Navigate to bids page
@@ -161,9 +208,19 @@ export function ProductDetailsDialog({ product, open, onOpenChange }: ProductDet
               <button
                 onClick={handleSubmitBid}
                 className="w-full bg-black text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-gray-800 transition-colors disabled:bg-gray-400"
-                disabled={!maxPrice || Number.parseFloat(maxPrice) <= 0}
+                disabled={!maxPrice || Number.parseFloat(maxPrice) <= 0 || isNegotiating}
               >
-                Start AI Negotiation →
+                {isNegotiating ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Agents Negotiating...
+                  </span>
+                ) : (
+                  "Start AI Negotiation →"
+                )}
               </button>
             )}
           </DialogFooter>

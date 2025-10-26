@@ -22,6 +22,12 @@ export function MagazineHeader({ currentPage }: MagazineHeaderProps) {
           </Link>
           <div className="flex gap-8 text-sm uppercase tracking-wider font-semibold">
             <Link 
+              href="/agents"
+              className="hover:text-gray-600 transition-colors text-gray-600"
+            >
+              Agents
+            </Link>
+            <Link 
               href="/marketplace?mode=buyer" 
               className={`hover:text-gray-600 transition-colors ${currentPage === 'marketplace' ? 'text-black border-b-2 border-black' : 'text-gray-600'}`}
             >

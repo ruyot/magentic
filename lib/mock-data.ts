@@ -57,16 +57,16 @@ export const mockProducts: Product[] = [
   },
   {
     id: "2",
-    title: "iPhone 15 Pro 256GB - Blue Titanium",
-    price: 899,
+    title: "iPhone 13 128GB - Blue",
+    price: 450,
     location: "Stanford, CA",
     category: "Electronics",
-    image: "https://images.unsplash.com/photo-1592286927505-2ff9194c6b6a?w=400&h=300&fit=crop",
+    image: "/iphone13.png",
     description:
-      "Unlocked iPhone 15 Pro in excellent condition. Battery health at 98%. Comes with case and screen protector.",
+      "Unlocked iPhone 13 in excellent condition. Battery health at 95%. Comes with case and screen protector.",
     sellerId: "seller2",
     condition: "Excellent",
-    priceRange: { min: 800, max: 950 },
+    priceRange: { min: 380, max: 500 },
   },
   {
     id: "3",

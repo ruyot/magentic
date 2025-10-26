@@ -203,29 +203,56 @@ export default function LandingPage() {
           </div>
         </motion.div>
 
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="border-t-2 border-b-2 border-black py-12"
-        >
-          <div className="grid grid-cols-3 gap-8 text-center">
-            <div>
-              <div className="text-6xl font-black mb-2">10X</div>
-              <div className="text-sm uppercase tracking-wider text-gray-600">Faster Deals</div>
-            </div>
-            <div>
-              <div className="text-6xl font-black mb-2">24/7</div>
-              <div className="text-sm uppercase tracking-wider text-gray-600">AI Active</div>
-            </div>
-            <div>
-              <div className="text-6xl font-black mb-2">0%</div>
-              <div className="text-sm uppercase tracking-wider text-gray-600">Ghost Rate</div>
-            </div>
-          </div>
-        </motion.div>
+            {/* Agents Callout */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="bg-black text-white p-12 mb-20"
+            >
+              <div className="text-center space-y-6">
+                <h2 className="text-5xl font-black uppercase tracking-tight">
+                  AGENTS DEPLOYED ON<br />FETCH.AI AGENTVERSE
+                </h2>
+                <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                  Buyer and seller agents use Claude AI via Lava Gateway for intelligent negotiation
+                </p>
+                <Link href="/agents">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white text-black px-8 py-4 font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors mt-4"
+                  >
+                    View Agent Details →
+                  </motion.button>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Stats Section */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="border-t-2 border-b-2 border-black py-12"
+            >
+              <div className="grid grid-cols-3 gap-8 text-center">
+                <div>
+                  <div className="text-6xl font-black mb-2">10X</div>
+                  <div className="text-sm uppercase tracking-wider text-gray-600">Faster Deals</div>
+                </div>
+                <div>
+                  <div className="text-6xl font-black mb-2">24/7</div>
+                  <div className="text-sm uppercase tracking-wider text-gray-600">AI Active</div>
+                </div>
+                <div>
+                  <div className="text-6xl font-black mb-2">0%</div>
+                  <div className="text-sm uppercase tracking-wider text-gray-600">Ghost Rate</div>
+                </div>
+              </div>
+            </motion.div>
 
         {/* Footer */}
         <motion.div
