@@ -18,7 +18,7 @@ export function MagazineHeader({ currentPage }: MagazineHeaderProps) {
       <div className="max-w-7xl mx-auto px-8 py-6">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-2xl font-black uppercase tracking-tighter hover:text-gray-600 transition-colors">
-            AgentMarket
+            Magentic
           </Link>
           <div className="flex gap-8 text-sm uppercase tracking-wider font-semibold">
             <Link 

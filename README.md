@@ -1,4 +1,4 @@
-# AgentMarket
+# Magentic
 
 > **Never get ghosted again.** An AI-powered marketplace where intelligent agents negotiate deals on behalf of buyers and sellers, closing deals 10x faster with zero hassle.
 
@@ -17,7 +17,7 @@ Traditional online marketplaces like Facebook Marketplace suffer from:
 
 ## Our Solution
 
-AgentMarket uses AI agents powered by [Fetch.ai's Agentverse](https://fetch.ai/) to automate the negotiation process. Both buyers and sellers have their own AI agents that:
+Magentic uses AI agents powered by [Fetch.ai's Agentverse](https://fetch.ai/) to automate the negotiation process. Both buyers and sellers have their own AI agents that:
 
 1. **Understand intent**: Know their client's goals and price constraints
 2. **Negotiate intelligently**: Communicate in real-time to find mutually beneficial deals
@@ -162,8 +162,8 @@ marketplace/
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/agentmarket.git
-cd agentmarket
+git clone https://github.com/yourusername/magentic.git
+cd magentic
 
 # Install dependencies
 pnpm install

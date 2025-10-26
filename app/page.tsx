@@ -27,7 +27,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-8 py-6">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-sm uppercase tracking-widest text-gray-600 hover:text-black transition-colors">
-              AgentMarket
+              Magentic
             </Link>
             <div className="flex gap-8 text-sm uppercase tracking-wider">
               <Link href="/marketplace?mode=buyer" className="hover:text-gray-600 cursor-pointer transition-colors">Browse</Link>
@@ -50,7 +50,7 @@ export default function LandingPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-8xl md:text-[12rem] font-black leading-none tracking-tighter mb-4"
           >
-            AGENT<span className="block">MARKET</span>
+            MAGENTIC
           </motion.h1>
           <motion.div 
             initial={{ width: 0 }}
@@ -63,7 +63,7 @@ export default function LandingPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-2xl md:text-3xl tracking-wide font-light italic"
-            style={{ color: '#D4AF37' }}
+            style={{ color: '#E91E8C' }}
           >
             The Future of Trading Used Goods
           </motion.p>
@@ -85,8 +85,8 @@ export default function LandingPage() {
               </h2>
               <p className="text-xl text-gray-700 leading-relaxed">
                 Set your price, let AI agents negotiate on your behalf, and close deals 
-                <span className="font-bold" style={{ color: '#D4AF37' }}> 10x faster</span> with 
-                <span className="font-bold" style={{ color: '#D4AF37' }}> zero ghosting</span>.
+                <span className="font-bold" style={{ color: '#E91E8C' }}> 10x faster</span> with 
+                <span className="font-bold" style={{ color: '#E91E8C' }}> zero ghosting</span>.
               </p>
             </div>
 
@@ -177,7 +177,7 @@ export default function LandingPage() {
         >
           <div className="border-t-4 border-black pt-6">
             <TrendingUp className="h-12 w-12 mb-4" />
-            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#D4AF37' }}>Smart Bidding</h3>
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#E91E8C' }}>Smart Bidding</h3>
             <p className="text-gray-700 leading-relaxed">
               Set your maximum price and let AI agents negotiate the best deal within your budget. 
               Market analysis included.
@@ -186,7 +186,7 @@ export default function LandingPage() {
 
           <div className="border-t-4 border-black pt-6">
             <Sparkles className="h-12 w-12 mb-4" />
-            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#D4AF37' }}>Real-Time Chat</h3>
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#E91E8C' }}>Real-Time Chat</h3>
             <p className="text-gray-700 leading-relaxed">
               Watch agents communicate and finalize deals instantly. Human intervention only 
               at critical checkpoints.
@@ -195,7 +195,7 @@ export default function LandingPage() {
 
           <div className="border-t-4 border-black pt-6">
             <Shield className="h-12 w-12 mb-4" />
-            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#D4AF37' }}>Zero Ghosting</h3>
+            <h3 className="text-2xl font-bold mb-3 uppercase tracking-wide" style={{ color: '#E91E8C' }}>Zero Ghosting</h3>
             <p className="text-gray-700 leading-relaxed">
               AI agents never sleep, never ghost. They respond instantly and keep negotiations 
               moving forward 24/7.
@@ -266,7 +266,7 @@ export default function LandingPage() {
             Powered by Fetch.ai • Arize • Letta
           </div>
           <div className="text-xs text-gray-500">
-            © 2025 AgentMarket. AI-Powered Marketplace.
+            © 2025 Magentic. AI-Powered Marketplace.
           </div>
         </motion.div>
       </main>

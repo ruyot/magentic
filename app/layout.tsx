@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'AgentMarket - AI-Powered Marketplace',
+  title: 'Magentic - AI-Powered Marketplace',
   description: 'Never get ghosted again. Let AI agents negotiate your deals in real-time.',
   keywords: ['marketplace', 'ai agents', 'automated bidding', 'fetch.ai', 'agentverse'],
 }

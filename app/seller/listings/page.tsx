@@ -59,7 +59,7 @@ export default function SellerListingsPage() {
           className="border-b-2 border-black pb-8 mb-8"
         >
           <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4">
-            YOUR <span style={{ color: '#D4AF37' }}>LISTINGS</span>
+            YOUR <span style={{ color: '#E91E8C' }}>LISTINGS</span>
           </h1>
           <div className="flex gap-8 text-sm uppercase tracking-wide">
             <div className="flex items-center gap-2">

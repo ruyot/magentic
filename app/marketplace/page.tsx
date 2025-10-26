@@ -39,7 +39,7 @@ function MarketplaceContent() {
           animate={{ opacity: 1, y: 0 }}
           className="border-b-2 border-black pb-8 mb-8"
         >
-          <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4" style={{ color: '#D4AF37' }}>
+          <h1 className="text-6xl md:text-7xl font-black uppercase tracking-tighter mb-4" style={{ color: '#E91E8C' }}>
             MARKETPLACE
           </h1>
           <p className="text-xl text-gray-600 uppercase tracking-wide">
